@@ -1,15 +1,14 @@
 getwd()
 # setwd("/Users/kimdongkyu/Desktop")
-setwd("C:/Users/shim1/Desktop/SJH/Projects/")
+setwd("C:/Users/user/Desktop/광고매체추천")
 test<- read.csv("MCR_휴대폰.csv", fileEncoding = 'euc-kr')
 class(test)
 class(test$J_02_01_011_1)
-install.packages("dplyr")
+# install.packages("dplyr")
 library(dplyr)
 
 
 
-java
 
 
 
@@ -183,7 +182,7 @@ z1_rate_df
 xyz <- rbind(x1_rate_df, y1_rate_df, z1_rate_df)
 xyz
 xyz <- t(xyz)
-View(xyz)
+View(xyz)ㅋ
 
 
 
@@ -234,10 +233,63 @@ d4
 mds3 <- cmdscale(d4, k=3)
 mds3
 
-# install.packages("scatterplot3d")
-library(scatterplot3d)
-scatterplot3d(mds3, color="dark blue", pch=1, main="Mulitmensional Scaling 3-D Plot", sub="Three Dimensional Solution", grid=TRUE, box=TRUE)
 
+
+# install.packages("scatterplot3d")
+
+library(scatterplot3d)
+
+levels=c("A","B","C","D","E","F","G")
+df <- data.frame(levels)
+colors <-c("#FF0000", "#FF3300", "#FFCC33","#00CC33", "#0000FF", "#000066","#9900FF")
+mds4 <- cbind(mds3, df)
+mds4
+
+mds4 <- rename(mds4,"접촉률"= 1)
+mds4 <- rename(mds4,"관심도"= 2)
+mds4 <- rename(mds4,"영향력"= 3)
+
+xyz <- rename(xyz,"접촉률"= V1)
+xyz <- rename(xyz,"관심도"= V2)
+xyz <- rename(xyz,"영향력"= V3)
+
+xyz2<- read.csv("xyz.csv", fileEncoding = 'euc-kr')
+xyz2
+# colors <- c("#999999", "#E69F00", "#56B4E9")
+# colors <- colors[as.numeric(iris$Species)]
+
+
+scatterplot3d(xyz2[,2:4], color=colors, pch=16, main="광고 이용매체별 MDS 분석 (휴대폰)", 
+              grid=TRUE, box=TRUE, type="h")
+
+
+
+
+
+#캡처용 
+
+d4_ = dist(xyz3)
+mds3_ <- cmdscale(d4, k=3)
+colors <-c("#FF0000", "#FF3300", "#FFCC33",
+       "#00CC33", "#0000FF", "#000066","#9900FF")
+scatterplot3d(xyz3[,2:4], color=colors, pch=16, 
+        main="광고 이용매체별 MDS 분석 (여성화장품)", 
+        grid=TRUE, box=TRUE, type="h")
+
+
+
+
+
+xyz3<- read.csv("xyz2.csv", fileEncoding = 'euc-kr')
+scatterplot3d(xyz3[,2:4], color=colors, pch=16, main="매체별 MDS 분석", sub="Three Dimensional Solution", 
+              grid=TRUE, box=TRUE, type="h")
+# s3d <- scatterplot3d(mds4[,1:3], color=colors, pch=16, main="매체별 MDS 분석", sub="Three Dimensional Solution")
+# 
+# legend("bottom", legend=levels(mds4$levels), pch=16, inset= -0.25, xpd=TRUE, horiz=TRUE)
+
+  
+  
+  
 # install.packages(c("rgl","car"))
 require(car)
 sep.x <- xyz[,1]
@@ -265,10 +317,26 @@ xyz
 
 test5<- read.csv("상관관계용2.csv", fileEncoding = 'euc-kr')
 View(test5)
+test6 <- test5[c(1:7),c(1:3)]
+test6
 cor.test5 <- cor.test(~ 접촉률+관심도, method="pearson", data=test5)
 cor.test5
 cor.test6 <- cor.test(~ 관심도+영향도, method="pearson", data=test5)
 cor.test6
 cor.test7 <- cor.test(~ 접촉률+영향도, method="pearson", data=test5)
 cor.test7
+
+plot(test6)
+pairs(test6, panel=panel.smooth)
+install.packages("PerformanceAnalytics")
+library(PerformanceAnalytics)
+chart.Correlation(test6, histogram = TRUE, pch=20)
+
+install.packages("corrplot")
+
+library(corrplot)
+test6.cor <- cor(test6)
+test6.cor
+corrplot(test6.cor, method="number")
+
 
