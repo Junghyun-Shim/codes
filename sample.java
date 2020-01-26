@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class sample {
 
@@ -76,12 +77,28 @@ public class sample {
 //		for(String number: numbers) {
 //		    System.out.println(number);
 //		}
+//		
+//		ArrayList<String> numbers = new ArrayList<String>();
+//		numbers.add("one");
+//		numbers.add("two");
+//		for (String number: numbers) {
+//			System.out.println(number);
+//		}
 		
-		ArrayList<String> numbers = new ArrayList<String>();
-		numbers.add("one");
-		numbers.add("two");
-		for (String number: numbers) {
-			System.out.println(number);
-		}
+		
+// # map pactice
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("people", "»ç¶÷");
+		System.out.println(map.get("people"));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
