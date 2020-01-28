@@ -87,11 +87,11 @@ public class sample {
 		
 		
 // # map pactice
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("people", "사람");
-		System.out.println(map.get("people"));
-		
-		
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("people", "사람");
+//		System.out.println(map.get("people"));
+
+	
 		
 		
 		
